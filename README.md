@@ -1,7 +1,9 @@
 # Relevant topic modeling
+
 This is reposity with scripts for similarity search and topic modeling
 
 # Preperation
+
 <details>
 <summary>Creating and acrivating virtual envionment (optional)</summary>
 Creating virtual enviornment
@@ -22,7 +24,9 @@ Linux
 ```
 source <venv>/bin/activate
 ```
+
 </details>
+
 Requirements installation
 
 ```
@@ -30,11 +34,14 @@ pip install -r requirenments.txt
 ```
 
 # Full process
+
 ```
 python scripts/process.py data.csv queries.txt
 ```
+
 <details>
 <summary>process.py usage</summary>
+  
 ``` 
 usage: process.py [-h] [-o OUTPUT] [-l LANG] [-s] [-m MODEL] [-t THRESHOLD] [-sm SPACY_MODEL] [-gpt GPT_MODEL]
                   input queries
@@ -58,13 +65,18 @@ options:
   -gpt GPT_MODEL, --gpt_model GPT_MODEL
                         model for topic representation and summary (default: None)
 ```
+
 </details>
+
 # Paragraphs and sentences split process
+
 ```
 python scripts/split.py data.csv
 ```
+
 <details>
 <summary>split.py usage</summary>
+  
 ```
 usage: split.py [-h] [-o OUTPUT] [-l LANG] [-s] [-m MODEL] input
 
@@ -80,14 +92,18 @@ options:
   -m MODEL, --model MODEL
                         model for smart paragraphisation (default: sentence-transformers/sentence-t5-xl)
 ```
+
 </details>
 
 # Similarity score computing
+
 ```
 python scripts/similarity.py queris.txt
 ```
+
 <details>
 <summary>similarity.py usage</summary>
+  
 ```
 usage: similarity.py [-h] [-i INPUT] [-o OUTPUT] [-e EMBEDDINGS] [-m MODEL] queries
 
@@ -105,13 +121,18 @@ options:
   -m MODEL, --model MODEL
                         model for embedding (default: sentence-transformers/sentence-t5-xl)
 ```
+
 </details>
+
 # Topic modeling
+
 ```
 python scripts/topic_modeling.py
 ```
+
 <details>
 <summary>topic_modeling.py usage</summary>
+  
 ```
 usage: topic_modeling.py [-h] [-i INPUT] [-o OUTPUT] [-t THRESHOLD] [-sm SPACY_MODEL] [-m MODEL] [-gpt GPT_MODEL]
 
@@ -131,4 +152,5 @@ options:
   -gpt GPT_MODEL, --gpt_model GPT_MODEL
                         model for topic representation and summary (default: None)
 ```
+
 </details>
