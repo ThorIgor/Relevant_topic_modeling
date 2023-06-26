@@ -18,7 +18,7 @@ Linux
 source <venv>/bin/activate
 ```
 </details>
-Requrinments installation
+Requirements installation
 ```
 pip install -r requirenments.txt
 ```
