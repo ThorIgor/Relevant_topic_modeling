@@ -35,8 +35,10 @@ pip install -r requirenments.txt
 
 # Full process
 
+Example:
+
 ```
-python scripts/process.py data.csv queries.txt
+python scripts/process.py example/data.csv example/queries.txt
 ```
 
 <details>
@@ -71,7 +73,7 @@ options:
 # Paragraphs and sentences split process
 
 ```
-python scripts/split.py data.csv
+python scripts/split.py example/data.csv
 ```
 
 <details>
@@ -98,7 +100,7 @@ options:
 # Similarity score computing
 
 ```
-python scripts/similarity.py queris.txt
+python scripts/similarity.py example/queries.txt
 ```
 
 <details>
