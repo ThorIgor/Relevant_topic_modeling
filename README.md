@@ -1,6 +1,6 @@
 # Relevant topic modeling
 
-This is reposity with scripts for similarity search and topic modeling
+This is repository with scripts for similarity search and topic modeling
 
 # Preperation
 
