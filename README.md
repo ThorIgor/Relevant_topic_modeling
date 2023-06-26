@@ -38,7 +38,7 @@ pip install -r requirenments.txt
 Example:
 
 ```
-python scripts/process.py example/data.csv example/queries.txt
+python scripts/process.py example/test.csv example/queries.txt
 ```
 
 <details>
@@ -73,7 +73,7 @@ options:
 # Paragraphs and sentences split process
 
 ```
-python scripts/split.py example/data.csv
+python scripts/split.py example/test.csv
 ```
 
 <details>
