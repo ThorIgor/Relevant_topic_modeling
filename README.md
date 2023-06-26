@@ -141,7 +141,7 @@ usage: topic_modeling.py [-h] [-i INPUT] [-o OUTPUT] [-t THRESHOLD] [-sm SPACY_M
 options:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
-                        path to directory with sentences_sim.csv, optionaly with sentences_embeddings.npy (default:
+                        path to directory with sentences_sim.csv, optionaly with sentences_embeddings.npy, documents.csv (default:
                         ../data/)
   -o OUTPUT, --output OUTPUT
                         path to directory where files will be stored (default: ../data/)
