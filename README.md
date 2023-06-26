@@ -5,23 +5,30 @@ This is reposity with scripts for similarity search and topic modeling
 <details>
 <summary>Creating and acrivating virtual envionment (optional)</summary>
 Creating virtual enviornment
+
 ```
 python -m venv venv
 ```
 Activating virtual enviornment
+
 Windows
+
 ```
 venv\Scripts\activate.bat
 ```
+
 Linux
+
 ```
 source <venv>/bin/activate
 ```
 </details>
 Requirements installation
+
 ```
 pip install -r requirenments.txt
 ```
+
 # Full process
 ```
 python scripts/process.py data.csv queries.txt
