@@ -5,13 +5,13 @@ This is repository with scripts for similarity search and topic modeling
 # Preperation
 
 <details>
-<summary>Creating and acrivating virtual envionment (optional)</summary>
-Creating virtual enviornment
+<summary>Creating and activating virtual environment (optional)</summary>
+Creating virtual environment
 
 ```
 python -m venv venv
 ```
-Activating virtual enviornment
+Activating virtual environment
 
 Windows
 
@@ -72,6 +72,8 @@ options:
 
 # Paragraphs and sentences split process
 
+Example:
+
 ```
 python scripts/split.py example/test.csv
 ```
@@ -98,6 +100,8 @@ options:
 </details>
 
 # Similarity score computing
+
+Example:
 
 ```
 python scripts/similarity.py example/queries.txt
@@ -127,6 +131,8 @@ options:
 </details>
 
 # Topic modeling
+
+Example:
 
 ```
 python scripts/topic_modeling.py
