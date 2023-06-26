@@ -114,8 +114,8 @@ def topic_representation(api_key, gpt_model, topic_model, df):
         df (pd.DataFrame): DataFrame with sentences
 
       Returns:
-        new_topics (dict): dict with new topic representations
-        summary (dict): dict with summary for each topic
+        new_topics (list): list with new topic representations
+        summary (list): list with summary for each topic
     """
     
     print("Topic representation ...")
@@ -123,36 +123,48 @@ def topic_representation(api_key, gpt_model, topic_model, df):
 
     encoding = tiktoken.encoding_for_model(gpt_model)
     mean_len = df['text'].apply(lambda x: len(encoding.encode(x))).mean()
+    print(f"Mean token count in sentences: {mean_len}")
 
-    gpt_model = OpenAI(model=gpt_model, delay_in_seconds=60, chat=True, nr_docs = min(int(4096/mean_len), 50))
+    gpt_model = OpenAI(model=gpt_model, delay_in_seconds=10, chat=True, nr_docs = min(int(4096/mean_len), 20))
 
     documents = topic_model.get_document_info(df['text'])
     documents['Representation'] = documents['Representation'].apply(lambda x: tuple(x))
     documents['Representative_Docs'] = documents['Representative_Docs'].apply(lambda x: tuple(x))
 
+    gpt_model.prompt = """
+      I have a topic that is described by the following keywords: [KEYWORDS]
+      In this topic, the following sentences are a small but representative subset of all sentences in the topic:
+      [DOCUMENTS]
+
+      Based on the information above, extract a short topic label (~100 characters) in the following format:
+      topic: <topic label>
+      """
+
+    new_topics = None
+    summary = None 
+
     try:
       new_topics = gpt_model.extract_topics(topic_model, documents, topic_model.c_tf_idf_, topic_model.get_topics())
-    except openai.error.APIError as ex:
-      print("!!! OpenAI APIError !!!")
-      print(ex)
+      new_topics = [str(key) + ". " + new_topics[key][0][0] for key in new_topics]
+    except:
+      print("!!! OpenAI APIError during topic representation !!!")
 
     gpt_model.prompt = """
       I have a topic that is described by the following keywords: [KEYWORDS]
-      In this topic, the following documents are a small but representative subset of all documents in the topic:
+      In this topic, the following sentences are a small but representative subset of all sentences in the topic:
       [DOCUMENTS]
 
-      Based on the information above, please give a description of this topic in the following format:
+      Based on the information above, please give a short description (~1000 characters) of this topic in the following format:
       topic: <description>
       """
     
     print("Summary ...")
     try:
       summary = gpt_model.extract_topics(topic_model, documents, topic_model.c_tf_idf_, topic_model.get_topics())
-    except openai.error.APIError as ex:
-      print("!!! OpenAI APIError !!!")
-      print(ex)
+      summary = [str(key) + ". " + summary[key][0][0] for key in summary]
+    except:
+      print("!!! OpenAI APIError during summary !!!")
        
-
     return new_topics, summary
 
 def run(args):
@@ -197,27 +209,27 @@ def run(args):
     with open(args.output + "topics_raw.txt", "w+") as f:
       f.write('\n'.join([str(topic) + ". " + ', '.join([t[0] for t in model.get_topics()[topic]]) for topic in model.get_topics()]))
     
-
+    new_topics, summary = None, None
     if args.gpt_model is not None:
       if args.api_key is None:
-         raise RuntimeError("No gpt key provided")
+         raise RuntimeError("No openai key provided")
       new_topics, summary = topic_representation(args.api_key, args.gpt_model, model, df)
-    else:
+    if new_topics is None:
       new_topics = model.generate_topic_labels(nr_words=7, topic_prefix=True, separator=", ")
-      summary = None
     model.set_topic_labels(new_topics)
 
     print("Saving updated topics ...")
     with open(args.output + "topics_updated.txt", "w+") as f:
-      f.write('\n'.join([str(key) + ". " + new_topics[key][0][0] for key in new_topics]))
+      f.write('\n'.join(new_topics))
+    print("Saving summary ...")
     if summary is not None:
       with open(args.output + "summary.txt", "w+") as f:
-         f.write('\n'.join([str(key) + ". " + summary[key][0][0] for key in summary]))
+         f.write('\n'.join(summary))
 
     print("Saving visuals ...")
     lens = []
-    for topic in model.get_topics().values():
-      lens.append(len(" ".join([word for word, _ in topic])) + 3)
+    for topic in new_topics:
+      lens.append(len(topic) + 3)
     width = max(lens)*3 + 500
 
     try:
