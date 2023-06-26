@@ -230,7 +230,7 @@ def run(args):
     lens = []
     for topic in new_topics:
       lens.append(len(topic) + 3)
-    width = max(lens)*3 + 500
+    width = max(lens)*5 + 500
 
     try:
       model.visualize_topics(custom_labels = True, width = width).write_html(args.output + "topics_vis.html")

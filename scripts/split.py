@@ -162,7 +162,7 @@ def sentences(df_pars:pd.DataFrame, lang:str = "en")->pd.DataFrame:
 
 def run(args):
     """
-    Main function to run the paragraphization and sentization process.
+    Run paragraphs and sentences split process.
     
     Args:
         args: Command-line arguments passed to the script.
