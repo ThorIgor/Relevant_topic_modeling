@@ -38,7 +38,7 @@ pip install -r requirenments.txt
 Example:
 
 ```
-python scripts/process.py example/test.csv example/queries.txt
+python scripts/process.py example/test.csv example/queries.txt -o data/
 ```
 
 <details>
@@ -75,7 +75,7 @@ options:
 Example:
 
 ```
-python scripts/split.py example/test.csv
+python scripts/split.py example/test.csv -o /data
 ```
 
 <details>
@@ -104,7 +104,7 @@ options:
 Example:
 
 ```
-python scripts/similarity.py example/queries.txt
+python scripts/similarity.py example/queries.txt -i data/ -o data/
 ```
 
 <details>
@@ -135,7 +135,7 @@ options:
 Example:
 
 ```
-python scripts/topic_modeling.py
+python scripts/topic_modeling.py -i data/ -o data/
 ```
 
 <details>

@@ -22,6 +22,7 @@ if __name__ == "__main__":
     parser.add_argument("-t", "--threshold", help = "threshold to determine relevant sentences (default: 0.5)", type = float, default = 0.5)
     parser.add_argument("-sm", "--spacy_model", help = "spacy model for lemmatization (default: en_core_web_lg)", type = str, default = "en_core_web_lg")
     parser.add_argument("-gpt", "--gpt_model", help = "model for topic representation and summary (default: None)", type = str, default = None)
+    parser.add_argument("-ak", "--api_key", help = "openAI API key (default: None)", type = str, default = None)
 
     args = parser.parse_args()
     run(args)

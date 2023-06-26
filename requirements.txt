@@ -8,3 +8,5 @@ keyphrase_vectorizers
 tqdm
 bertopic
 keybert
+openai
+tiktoken
