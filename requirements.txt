@@ -1,0 +1,10 @@
+numpy
+pandas
+spacy
+sklearn
+scipy
+sentence_transformers
+keyphrase_vectorizers
+tqdm
+bertopic
+keybert
