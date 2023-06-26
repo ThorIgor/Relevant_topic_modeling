@@ -75,7 +75,7 @@ options:
 Example:
 
 ```
-python scripts/split.py example/test.csv -o /data
+python scripts/split.py example/test.csv -o data/
 ```
 
 <details>
